@@ -1,21 +1,106 @@
-import commonStyles from '../../styles/Common.module.scss'
+import { useEffect, useState } from 'react'
 import styles from './Styles.module.scss'
+import cardStyle from './styles/Card.module.scss'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { format } from 'json-string-formatter';
 
-export default function Details() {
+export default function Details({ link, linkData, reset }: { link: string, linkData: { data: Object }, reset: CallableFunction }) {
+    if (!link || !linkData) {
+        return null;
+    }
+    const [show, setShow] = useState(false);
+    useEffect(() => {
+        if (process.browser) {
+            setShow(true);
+        }
+    }, [])
+
+    const [jsonObj, setJsonObj] = useState<any>(null);
+    useEffect(() => {
+        setJsonObj(linkData.data)
+    }, [])
+
+    if (!jsonObj) {
+        return null;
+    }
+
     return (
-        <div className={commonStyles.container}>
-            <main className={commonStyles.main}>
+        <div className={styles.details}>
+            <div className={styles.top}>
                 <h1 className={styles.title}>
-                    De Previewer
+                    Link Previewer
                 </h1>
                 <div className={styles.hrLine} />
+            </div>
+            <div className={styles.left}>
+
                 <div className={styles.inputWrapper}>
-                    <label className={styles.label} >Enter your link here</label>
-                    <input className={styles.input} type='text' placeholder='https://google.com' />
-                    <p className={styles.info}>This link is not valid</p>
+                    <input className={styles.input} disabled defaultValue={link} type='text' placeholder='https://google.com' />
                 </div>
-                <button className={styles.button}>view</button>
-            </main>
+                <div className={styles.buttonGroup}>
+                    <button className={styles.button + " " + styles.secondary} onClick={() => reset()}>reset</button>
+                    <button className={styles.button}>copy link</button>
+                </div>
+                {show && jsonObj &&
+                    <SyntaxHighlighter
+                        language="json"
+                        style={materialOceanic}
+                        wrapLongLines={true}
+                        customStyle={{ overflow: 'auto', marginTop: '24px', borderRadius: '6px', maxWidth: '100%' }}
+                    >
+                        {format(JSON.stringify(jsonObj))}
+                    </SyntaxHighlighter>
+                }
+
+            </div>
+
+            <div className={styles.right}>
+                <div>
+                    <div className={cardStyle.preview_card}>
+                        <div className={cardStyle.preview_card_div0}>
+                            <img
+                                src={jsonObj.image}
+                                alt="image"
+                            />
+                        </div>
+                        <div className={cardStyle.preview_card_div1}>
+                            <div className={cardStyle.preview_card_text}>
+                                <p>{jsonObj.title}</p>
+                                <p>{jsonObj.description} </p>
+                            </div>
+                            {jsonObj.icon &&
+                                <div className={cardStyle.preview_card_icon}>
+                                    <img src={jsonObj.icon} alt="icon" />
+                                </div>
+                            }
+                        </div>
+                        <div className={cardStyle.preview_card_div2}>
+                            <span> {jsonObj.type} </span>
+                            {jsonObj.owner &&
+                                <span> {jsonObj.owner} </span>
+                            }
+                            <span> {jsonObj.language} </span>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.embed}>
+                    <p>Embed this to your website</p>
+                    <div
+                        className={styles.code}>
+                        <code>
+                            {` <script src="https://stackoverflow.com/users/"></script>`}
+                        </code>
+                    </div>
+                    <br />
+                    <div
+                        className={styles.code}>
+                        <code>
+                            {` <a enable-pagecard href="https://stackoverflow.com/users/15074634/anish-roy">Feel the Love</a>`}
+                        </code>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

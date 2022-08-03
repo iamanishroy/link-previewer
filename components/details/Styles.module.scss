@@ -1,5 +1,23 @@
+.details {
+  width: 100%;
+  padding: 0 120px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  column-gap: 120px;
+  grid-template-rows: 84px 1fr;
+  height: 100vh;
+
+  .top {
+    grid-column: 1 / span 2;
+  }
+
+  .left {
+    width: 100%;
+  }
+}
+
 .hrLine {
-  width: 360px;
+  width: 100%;
   height: 2px;
   background-color: var(--primary);
   margin: 18px 0 36px 0;
@@ -7,59 +25,65 @@
     width: 100%;
   }
 }
-.inputWrapper {
+.input {
+  background-color: #cfcfcf;
   width: 100%;
-  .label {
-    display: block;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    color: rgb(206, 204, 204);
-  }
-  .input {
-    background-color: #fafafa;
-    width: 360px;
-    height: 48px;
-    border: 2px solid var(--primary);
-    border-radius: 6px;
-    padding: 0 1rem;
-    color: rgb(27, 27, 27);
-    font-weight: 500;
-    font-size: 1.1rem;
-    margin-bottom: 0;
-    box-shadow: 0px 0px 4px 2px var(--secondary);
-    @media (max-width: 600px) {
-      width: 100%;
-    }
-  }
-  .info {
-    font-size: 0.8rem;
-    font-weight: 400;
-    font-style: italic;
-    margin-top: 6px;
-    text-align: end;
-    color: rgb(255, 173, 155);
+  height: 42px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  padding: 0 1rem;
+  color: rgb(27, 27, 27);
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  box-shadow: 0px 0px 4px 2px var(--secondary);
+  @media (max-width: 600px) {
+    width: 100%;
   }
 }
 
-.button {
-  background-color: var(--primary);
-  margin-top: 24px;
-  border: none;
-  height: 36px;
-  width: 114px;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+  .button {
+    background-color: var(--primary);
+    margin-top: 12px;
+    border: none;
+    height: 36px;
+    width: 114px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    &.secondary {
+      background: #efefef;
+      color: orangered;
+    }
+  }
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 3.2rem;
+  font-size: 2.4rem;
 }
 
-.title {
-  text-align: center;
+.embed {
+  margin-top: 36px;
+  p {
+    font-size: 0.8rem;
+    color: #e3e3e3;
+  }
+  .code {
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 6px 18px;
+    line-height: 16px;
+    font-size: 1rem;
+    background: #cfcfcf;
+    color: #1b1b1b;
+  }
 }
 
 // @media (max-width: 600px) {

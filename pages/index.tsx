@@ -1,11 +1,38 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Details from '../components/details'
+import { useEffect, useState } from 'react'
+// import Details from '../components/details'
 import Initial from '../components/initial'
+import getLinkData from '../helpers/getLinkData'
 import styles from '../styles/Common.module.scss'
 
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+const Details = dynamic(() => import('../components/details'), {
+  suspense: true,
+})
+
 const Home: NextPage = () => {
-  const initial = true;
+  const [link, setLink] = useState<string | null>(null);
+  const [linkData, setLinkData] = useState<any | null>(null);
+  // console.log()
+  useEffect(() => {
+    (async () => {
+      if (link) {
+        const data = await getLinkData(link);
+        if (data) {
+          setLinkData(data)
+        }
+      }
+    })();
+  }, [link])
+
+  function reset(): void {
+    setLink(null)
+    setLinkData(null)
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,9 +45,17 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {initial ?
-          <Initial /> :
-          <Details />
+        {link !== null && linkData ?
+          <>
+            {typeof window !== undefined &&
+              <Suspense fallback={`Loading...`}>
+                <Details link={link} linkData={linkData} reset={reset} />
+              </Suspense>
+            }
+          </>
+
+          :
+          <Initial setLink={setLink} />
         }
       </main>
 
