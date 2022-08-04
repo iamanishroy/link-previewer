@@ -18,7 +18,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-json-view-ts": "^1.16.7",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "use-clipboard-copy": "^0.2.0"
   },
   "devDependencies": {
     "@types/node": "18.6.3",

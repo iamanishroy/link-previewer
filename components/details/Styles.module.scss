@@ -5,7 +5,6 @@
   grid-template-columns: 1.2fr 0.8fr;
   column-gap: 120px;
   grid-template-rows: 84px 1fr;
-  height: 100vh;
 
   .top {
     grid-column: 1 / span 2;
@@ -13,6 +12,20 @@
 
   .left {
     width: 100%;
+  }
+
+  @media (max-width: 821px) {
+    grid-template-rows: unset;
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 0;
+    grid-auto-rows: min-content;
+    .top {
+      grid-column: unset;
+    }
+    .left {
+      margin-bottom: 40px;
+    }
   }
 }
 
@@ -69,29 +82,32 @@
   font-size: 2.4rem;
 }
 
-.embed {
-  margin-top: 36px;
-  p {
-    font-size: 0.8rem;
-    color: #e3e3e3;
-  }
-  .code {
-    border-radius: 6px;
-    font-weight: 600;
-    padding: 6px 18px;
-    line-height: 16px;
-    font-size: 1rem;
-    background: #cfcfcf;
-    color: #1b1b1b;
+.cardContainer {
+  display: flex;
+  @media (max-width: 821px) {
+    justify-content: center;
   }
 }
 
-// @media (max-width: 600px) {
-//   .grid {
-//     width: 100%;
-//     flex-direction: column;
-//   }
-// }
+.embed {
+  margin-top: 36px;
+  max-width: calc(100vw - 1.6rem);
+  p {
+    font-size: 0.9rem;
+    color: #e3e3e3;
+  }
+
+  .code {
+    color: #1b1b1b;
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    overflow-y: hidden;
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+}
 
 // @media (prefers-color-scheme: dark) {
 //   .card,

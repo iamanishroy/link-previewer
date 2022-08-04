@@ -4,8 +4,11 @@ import cardStyle from './styles/Card.module.scss'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { format } from 'json-string-formatter';
+import { useClipboard } from 'use-clipboard-copy';
+
 
 export default function Details({ link, linkData, reset }: { link: string, linkData: { data: Object }, reset: CallableFunction }) {
+
     if (!link || !linkData) {
         return null;
     }
@@ -17,6 +20,8 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
     }, [])
 
     const [jsonObj, setJsonObj] = useState<any>(null);
+    const clipboard = useClipboard({ copiedTimeout: 750 });
+
     useEffect(() => {
         setJsonObj(linkData.data)
     }, [])
@@ -24,6 +29,7 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
     if (!jsonObj) {
         return null;
     }
+
 
     return (
         <div className={styles.details}>
@@ -36,18 +42,20 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
             <div className={styles.left}>
 
                 <div className={styles.inputWrapper}>
-                    <input className={styles.input} disabled defaultValue={link} type='text' placeholder='https://google.com' />
+                    <input className={styles.input} ref={clipboard.target} readOnly disabled defaultValue={link} type='text' placeholder='https://google.com' />
                 </div>
                 <div className={styles.buttonGroup}>
                     <button className={styles.button + " " + styles.secondary} onClick={() => reset()}>reset</button>
-                    <button className={styles.button}>copy link</button>
+                    <button className={styles.button} onClick={clipboard.copy}>
+                        {clipboard.copied ? 'Copied!' : 'Copy Link'}
+                    </button>
                 </div>
                 {show && jsonObj &&
                     <SyntaxHighlighter
                         language="json"
                         style={materialOceanic}
                         wrapLongLines={true}
-                        customStyle={{ overflow: 'auto', marginTop: '24px', borderRadius: '6px', maxWidth: '100%' }}
+                        customStyle={{ overflow: 'auto', marginTop: '24px', borderRadius: '6px', maxWidth: 'calc(100vw - 1.6rem)' }}
                     >
                         {format(JSON.stringify(jsonObj))}
                     </SyntaxHighlighter>
@@ -56,7 +64,7 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
             </div>
 
             <div className={styles.right}>
-                <div>
+                <div className={styles.cardContainer}>
                     <div className={cardStyle.preview_card}>
                         <div className={cardStyle.preview_card_div0}>
                             <img
@@ -84,7 +92,7 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
                         </div>
                     </div>
                 </div>
-                <div className={styles.embed}>
+                {/* <div className={styles.embed}>
                     <p>Embed this to your website</p>
                     <div
                         className={styles.code}>
@@ -99,7 +107,7 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
                             {` <a enable-pagecard href="https://stackoverflow.com/users/15074634/anish-roy">Feel the Love</a>`}
                         </code>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
