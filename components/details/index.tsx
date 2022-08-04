@@ -8,28 +8,27 @@ import { useClipboard } from 'use-clipboard-copy';
 
 
 export default function Details({ link, linkData, reset }: { link: string, linkData: { data: Object }, reset: CallableFunction }) {
-
-    if (!link || !linkData) {
-        return null;
-    }
     const [show, setShow] = useState(false);
+    const [jsonObj, setJsonObj] = useState<any>(null);
+    const clipboard = useClipboard({ copiedTimeout: 750 });
+
     useEffect(() => {
         if (process.browser) {
             setShow(true);
         }
     }, [])
 
-    const [jsonObj, setJsonObj] = useState<any>(null);
-    const clipboard = useClipboard({ copiedTimeout: 750 });
-
     useEffect(() => {
         setJsonObj(linkData.data)
     }, [])
 
-    if (!jsonObj) {
+    if (!link || !linkData) {
         return null;
     }
 
+    if (!jsonObj) {
+        return null;
+    }
 
     return (
         <div className={styles.details}>
