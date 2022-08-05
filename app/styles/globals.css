@@ -14,6 +14,9 @@ a {
   box-sizing: border-box;
 }
 
+pre code {
+  word-break: break-all !important;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #2d88e2;

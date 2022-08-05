@@ -1,7 +1,7 @@
 var CARD_DETAILS = {
   image: `<div class="__linkPreview_div0"><img src="<::image::>" alt="<::title::>_image" /></div>`,
   main: `<div class="__linkPreview_div1"><div class="__linkPreview_text"><p><::title::></p><p><::description::></p></div><div class="__linkPreview_icon"><img src="<::icon::>" alt="<::title::>_icon" /></div></div>`,
-  extra: `<div class="__linkPreview_div2"><span><::type::></span><span><::owner::></span><span><::language::></span></div>`,
+  extra: `<div class="__linkPreview_div2"><span><::type::></span><span><::language::></span></div>`,
 };
 
 export default function getHTMLDetails(

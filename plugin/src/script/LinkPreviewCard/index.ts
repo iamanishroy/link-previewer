@@ -32,14 +32,20 @@ export default class LinkPreviewCard {
   }
 
   async getDetails() {
+    console.log(this.sid, LinkPreviewCard.store[this.sid]);
     if (Object.keys(LinkPreviewCard.store).includes(this.sid)) {
       return LinkPreviewCard.store[this.sid];
     } else {
       var details = await this.fetchDetails();
-      if (details) {
-        LinkPreviewCard.store[this.sid] = details;
+      if (
+        details &&
+        details.success &&
+        this.minimumDataAvailable(details.data)
+      ) {
+        LinkPreviewCard.store[this.sid] = details.data;
+        return details.data;
       }
-      return details;
+      return this.hydrateError();
     }
   }
 

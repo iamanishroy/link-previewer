@@ -10,7 +10,7 @@ export default async function getLinkData(link: string) {
       }
       return null;
     })
-    .catch((e) => {
+    .catch(() => {
       return null;
     });
 }
