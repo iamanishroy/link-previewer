@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from './Styles.module.scss'
+import styles from './styles/Styles.module.scss'
 import cardStyle from './styles/Card.module.scss'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialOceanic } from 'react-syntax-highlighter/dist/cjs/styles/prism';
