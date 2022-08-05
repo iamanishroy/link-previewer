@@ -2,7 +2,8 @@ import fetchLinkData from "./functions/fetchData";
 import getHash from "./functions/getHash";
 import LinkPreviewCard from "./LinkPreviewCard";
 
-var CSS_URL = "./../dist/style/styles.css";
+var CSS_URL =
+  "https://cdn.jsdelivr.net/npm/link-preview-card@0.0.2/dist/style/styles.css";
 
 (async () => {
   // @ts-ignore
@@ -17,10 +18,10 @@ var CSS_URL = "./../dist/style/styles.css";
   var linkData = await fetchLinkData([
     ...new Set([...aTags].map((aTag) => aTag.href)),
   ]);
-  linkData.forEach((data) => {
+  for (var i = 0; i < linkData.length; i++) {
+    var data = linkData[i];
     LinkPreviewCard.store[getHash(data.url)] = data;
-  });
-  console.log(LinkPreviewCard.store);
+  }
   aTags.forEach((aTag) => {
     new LinkPreviewCard(aTag);
   });

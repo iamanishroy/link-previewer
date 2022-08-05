@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import getMetaData from "metadata-scraper";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import NextCors from "nextjs-cors";
 
 type Data = {
   success: boolean;
@@ -12,6 +13,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+
   // @ts-ignore
   const link: string | null = req.query?.link || null;
 
