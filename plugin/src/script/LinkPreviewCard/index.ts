@@ -21,6 +21,9 @@ export default class LinkPreviewCard {
     this.activate();
   }
 
+  static setStoreValue(key, value) {
+    this.store[key] = value;
+  }
   async activate() {
     this.setCard();
     var data = await this.getDetails();
@@ -32,7 +35,6 @@ export default class LinkPreviewCard {
   }
 
   async getDetails() {
-    console.log(this.sid, LinkPreviewCard.store[this.sid]);
     if (Object.keys(LinkPreviewCard.store).includes(this.sid)) {
       return LinkPreviewCard.store[this.sid];
     } else {

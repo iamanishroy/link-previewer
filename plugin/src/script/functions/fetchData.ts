@@ -6,7 +6,7 @@ export default async function fetchLinkData(links: string[]) {
   }
   try {
     var response = await axios.post(
-      "http://localhost:3000/api/getLinkDataInBatch",
+      "https://link-previewer.anishroy.me/api/getLinkDataInBatch",
       { urls: links }
     );
     return response.data.data;

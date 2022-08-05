@@ -1,6 +1,6 @@
 {
   "name": "link-preview-card",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "description": "plugin for link-previewer",
   "main": "index.js",
   "scripts": {

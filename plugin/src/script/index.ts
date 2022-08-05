@@ -18,21 +18,25 @@ var CSS_URL =
   var linkData = await fetchLinkData([
     ...new Set([...aTags].map((aTag) => aTag.href)),
   ]);
+  // window["store"] = {};
+  // await setData(linkData);
 
-  await setData(linkData);
-  setTimeout(() => {
-    aTags.forEach((aTag) => {
-      new LinkPreviewCard(aTag);
-    });
-  }, 5000);
-})();
-
-async function setData(linkData) {
   for (var i = 0; i < linkData.length; i++) {
     var data = linkData[i];
-    LinkPreviewCard.store[getHash(data.url)] = data;
+    LinkPreviewCard.setStoreValue([getHash(data.url)], data);
   }
-}
+
+  aTags.forEach((aTag) => {
+    new LinkPreviewCard(aTag);
+  });
+})();
+
+// async function setData(linkData) {
+//   for (var i = 0; i < linkData.length; i++) {
+//     var data = linkData[i];
+//     window["store"][getHash(data.url)] = data;
+//   }
+// }
 function importStyles(): void {
   var link = document.createElement("link");
   link.href = CSS_URL;
