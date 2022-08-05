@@ -15,6 +15,7 @@
     "json-string-formatter": "^1.0.1",
     "metadata-scraper": "^0.2.57",
     "next": "12.2.3",
+    "nextjs-cors": "^2.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-json-view-ts": "^1.16.7",
