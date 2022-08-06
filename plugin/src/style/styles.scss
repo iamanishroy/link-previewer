@@ -32,21 +32,11 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 36px;
-    .__linkPreview_text {
-      p {
-        &:first-child {
-          font-size: 1.02rem;
-          font-weight: 600;
-          color: #171717;
-        }
-
-        &:last-child {
-          margin-top: 0.2rem;
-          color: #99aac1;
-          font-size: 0.82rem;
-          font-weight: 500;
-        }
-      }
+    p {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #171717;
+      // word-break: break-all;
     }
     .__linkPreview_icon {
       width: 36px;
@@ -59,6 +49,13 @@
     }
   }
   .__linkPreview_div2 {
+    width: 100%;
+    margin-top: 0.2rem;
+    color: #88919e;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .__linkPreview_div3 {
     display: flex;
     gap: 8px;
     margin-top: 0.6rem;

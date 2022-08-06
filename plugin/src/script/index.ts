@@ -3,7 +3,9 @@ import getHash from "./functions/getHash";
 import LinkPreviewCard from "./LinkPreviewCard";
 
 var CSS_URL =
-  "https://cdn.jsdelivr.net/npm/link-preview-card@0.0.2/dist/style/styles.css";
+  "https://cdn.jsdelivr.net/npm/link-preview-card@1.0.0/dist/style/styles.css";
+
+// var CSS_URL = "../dist/style/styles.css";
 
 (async () => {
   // @ts-ignore
@@ -18,25 +20,15 @@ var CSS_URL =
   var linkData = await fetchLinkData([
     ...new Set([...aTags].map((aTag) => aTag.href)),
   ]);
-  // window["store"] = {};
-  // await setData(linkData);
-
   for (var i = 0; i < linkData.length; i++) {
     var data = linkData[i];
-    LinkPreviewCard.setStoreValue([getHash(data.url)], data);
+    LinkPreviewCard.store[getHash(data.url)] = data;
   }
-
   aTags.forEach((aTag) => {
     new LinkPreviewCard(aTag);
   });
 })();
 
-// async function setData(linkData) {
-//   for (var i = 0; i < linkData.length; i++) {
-//     var data = linkData[i];
-//     window["store"][getHash(data.url)] = data;
-//   }
-// }
 function importStyles(): void {
   var link = document.createElement("link");
   link.href = CSS_URL;

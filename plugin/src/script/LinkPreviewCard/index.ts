@@ -1,7 +1,6 @@
 import axios from "axios";
 import getHash from "../functions/getHash";
 import getHTMLDetails from "../functions/template";
-// import { v4 as uuid } from "uuid";
 
 export default class LinkPreviewCard {
   static store: Object = {};
@@ -21,9 +20,6 @@ export default class LinkPreviewCard {
     this.activate();
   }
 
-  static setStoreValue(key, value) {
-    this.store[key] = value;
-  }
   async activate() {
     this.setCard();
     var data = await this.getDetails();
@@ -61,8 +57,26 @@ export default class LinkPreviewCard {
     this.cardElement.innerHTML = html_;
     this.elem.innerHTML = "";
     this.elem.style.textDecoration = "none";
-    this.cardElement.style.boxShadow = "0px 0px 24px 0px pink";
+    this.setCustomStyles();
     this.elem.appendChild(this.cardElement);
+  }
+
+  setCustomStyles() {
+    if (
+      this.elem.getAttribute("custom-box-shadow") !== null ||
+      this.elem.getAttribute("custom-box-shadow") !== undefined
+    ) {
+      this.cardElement.style.boxShadow =
+        this.elem.getAttribute("custom-box-shadow") || "";
+    }
+
+    if (
+      this.elem.getAttribute("custom-border") !== null ||
+      this.elem.getAttribute("custom-border") !== undefined
+    ) {
+      this.cardElement.style.border =
+        this.elem.getAttribute("custom-border") || "";
+    }
   }
 
   async fetchDetails() {
