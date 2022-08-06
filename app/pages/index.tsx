@@ -14,14 +14,18 @@ const Home: NextPage = () => {
   const [link, setLink] = useState<string | null>(null);
   const [linkData, setLinkData] = useState<any | null>(null);
   const [loading, setLoading] = useState(false);
-  // console.log()
+  const [notFound, setNotFound] = useState(false);
+
   useEffect(() => {
     (async () => {
+      setNotFound(false)
       if (link) {
         setLoading(true)
         const data = await getLinkData(link);
         if (data) {
           setLinkData(data)
+        } else {
+          setNotFound(true)
         }
         setLoading(false)
       }
@@ -45,7 +49,7 @@ const Home: NextPage = () => {
             }
           </>
           :
-          <Initial setLink={setLink} loading={loading} />
+          <Initial setLink={setLink} loading={loading} notFound={notFound} />
         }
       </main>
 

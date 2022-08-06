@@ -29,7 +29,7 @@ Simply include the JavaScript **`<script>`** tag to seamlessly integrate this in
 ></script>
 ```
 
-### anchor Tag
+### Anchor Tag
 
 add this where you want to embed preview link card
 

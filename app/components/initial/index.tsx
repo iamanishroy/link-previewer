@@ -3,7 +3,7 @@ import commonStyles from '../../styles/Common.module.scss'
 import styles from './styles/Styles.module.scss'
 import loader from './styles/Loader.module.scss'
 
-export default function Initial({ setLink, loading }: { setLink: Function, loading: boolean }) {
+export default function Initial({ setLink, loading, notFound }: { setLink: Function, loading: boolean, notFound: boolean }) {
 
     const [inputValue, setInputValue] = useState('https://');
     const [showInvalid, setShowInvalid] = useState(false);
@@ -14,7 +14,11 @@ export default function Initial({ setLink, loading }: { setLink: Function, loadi
             setShowInvalid(true)
         }
     }
-
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            onClickHandler()
+        }
+    }
     return (
         <>
             <main className={commonStyles.main}>
@@ -27,11 +31,13 @@ export default function Initial({ setLink, loading }: { setLink: Function, loadi
                     <input disabled={loading} className={styles.input} type='text' value={inputValue} onChange={v => {
                         setInputValue(v.target.value)
                         setShowInvalid(false)
-                    }} placeholder='https://google.com' />
+                    }} placeholder='https://google.com'
+                        onKeyDown={handleKeyDown} />
                     {loading &&
                         <div className={loader.loader_line}></div>
                     }
-                    <p className={styles.info}>{showInvalid && "This link is not valid"}</p>
+                    <p className={styles.info}>{showInvalid ? "This link is not valid" : notFound ? "No data found for this link" : ""}</p>
+
                 </div>
                 <button disabled={loading} className={styles.button} onClick={onClickHandler}>view</button>
             </main>
