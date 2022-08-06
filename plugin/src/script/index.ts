@@ -3,7 +3,7 @@ import getHash from "./functions/getHash";
 import LinkPreviewCard from "./LinkPreviewCard";
 
 var CSS_URL =
-  "https://cdn.jsdelivr.net/npm/link-preview-card@1.0.0/dist/style/styles.css";
+  "https://cdn.jsdelivr.net/npm/link-preview-card@1.0.1/dist/style/styles.css";
 
 // var CSS_URL = "../dist/style/styles.css";
 

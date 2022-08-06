@@ -82,7 +82,7 @@ export default class LinkPreviewCard {
   async fetchDetails() {
     try {
       var urlData = await axios.get(
-        `https://link-previewer.anishroy.me/api/getLinkData/?link=${this.url}`
+        `https://link-previewer.anishroy.me/api/getLinkData?link=${this.url}`
       );
       return urlData.data;
     } catch (err) {
