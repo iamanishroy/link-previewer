@@ -102,22 +102,9 @@
     background: #fafafa;
     border-radius: 6px;
     padding: 0.75rem;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     overflow-y: hidden;
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
   }
 }
-
-// @media (prefers-color-scheme: dark) {
-//   .card,
-//   .footer {
-//     border-color: #222;
-//   }
-//   .code {
-//     background: #111;
-//   }
-//   .logo img {
-//     filter: invert(1);
-//   }
-// }

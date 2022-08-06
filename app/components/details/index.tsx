@@ -91,22 +91,22 @@ export default function Details({ link, linkData, reset }: { link: string, linkD
                         </div>
                     </div>
                 </div>
-                {/* <div className={styles.embed}>
+                <div className={styles.embed}>
                     <p>Embed this to your website</p>
                     <div
                         className={styles.code}>
                         <code>
-                            {` <script src="https://stackoverflow.com/users/"></script>`}
+                            {` <script src="https://cdn.jsdelivr.net/npm/link-preview-card@1.0.0/dist/script/index.js" defer></script>`}
                         </code>
                     </div>
                     <br />
                     <div
                         className={styles.code}>
                         <code>
-                            {` <a enable-pagecard href="https://stackoverflow.com/users/15074634/anish-roy">Feel the Love</a>`}
+                            {`<a href="${link}" link-preview-card custom-border="1px solid black" custom-box-shadow="0px 0px 8px 0px orange"></a>`}
                         </code>
                     </div>
-                </div> */}
+                </div>
             </div>
         </div>
     )

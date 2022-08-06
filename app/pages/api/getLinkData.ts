@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import getMetaData from "metadata-scraper";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import NextCors from "nextjs-cors";
 
 type Data = {
   success: boolean;
@@ -12,14 +13,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  res.setHeader("Access-Control-Allow-Methods", "GET");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
 
   // @ts-ignore
   const link: string | null = req.query?.link || null;
